@@ -1,0 +1,73 @@
+int b1 = 2; //boton1
+int b2 = 3; //boton2
+int b3 = 4; //boton3
+int red = 5; //pin rojo
+int blue = 6; //pin azul
+int green = 7; //pin verde
+bool e1; //estado del boton 1
+bool e2; //estado del boton 2
+bool e3; //estado del boton 3
+
+void setup() {
+Serial.begin(9600);
+//Entrada con PULL-UP
+pinMode (b1, INPUT_PULLUP);
+pinMode (b2, INPUT_PULLUP);
+pinMode (b3, INPUT_PULLUP);
+
+//Pin Salida
+pinMode(red, OUTPUT);
+pinMode(green, OUTPUT);
+pinMode(blue, OUTPUT);
+}
+
+void loop() {
+//Lee estado del boton
+e1 = digitalRead(b1);
+e2 = digitalRead(b2);
+e3 = digitalRead(b3);
+//En pull-up, estado es 0 al presionar
+//En pull-up, estado es 1 sin presionar
+if(e1 == 0 && e2 == 1 && e3 == 1){
+  //Prende si al menos uno esta persionado
+  digitalWrite(red, HIGH);
+  digitalWrite(blue, LOW);
+  digitalWrite(green, LOW);
+}
+if(e1 == 1 && e2 == 0 && e3 == 1){
+  //Prende si al menos uno esta persionado
+  digitalWrite(red, LOW);
+  digitalWrite(blue, HIGH);
+  digitalWrite(green, LOW);
+}
+if(e1 == 1 && e2 == 1 && e3 == 0){
+  //Prende si al menos uno esta persionado
+  digitalWrite(red, LOW);
+  digitalWrite(blue, LOW);
+  digitalWrite(green, HIGH);
+}
+if(e1 == 0 && e2 == 0 && e3 == 1){
+  //Prende si al menos uno esta persionado
+  digitalWrite(red, HIGH);
+  digitalWrite(blue, HIGH);
+  digitalWrite(green, LOW);
+}
+if(e1 == 1 && e2 == 0 && e3 == 0){
+  //Prende si al menos uno esta persionado
+  digitalWrite(red, LOW);
+  digitalWrite(blue, HIGH);
+  digitalWrite(green, HIGH);
+}
+if(e1 == 0 && e2 == 1 && e3 == 0){
+  //Prende si al menos uno esta persionado
+  digitalWrite(red, HIGH);
+  digitalWrite(blue, LOW);
+  digitalWrite(green, HIGH);
+}
+if(e1 == 0 && e2 == 0 && e3 == 0){
+  //Prende si al menos uno esta persionado
+  digitalWrite(red, HIGH);
+  digitalWrite(blue, HIGH);
+  digitalWrite(green, HIGH);
+}
+}
